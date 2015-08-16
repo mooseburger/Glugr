@@ -1,0 +1,2 @@
+# Glugr
+Shop discount aggregator
