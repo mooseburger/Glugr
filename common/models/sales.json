@@ -16,8 +16,14 @@
       "required": true
     },
     "image": {
-      "type": "buffer",
+      "type": "string",
       "required": true
+    },
+    "effective_date": {
+      "type": "date"
+    },
+    "expiration_date": {
+      "type": "date"
     }
   },
   "validations": [],
