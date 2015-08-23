@@ -13,11 +13,11 @@
     },
     "description": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "image": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "effective_date": {
       "type": "date"
