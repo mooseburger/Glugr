@@ -2,6 +2,8 @@ var fs = require('fs');
 var request = require('request');
 var $ = require('jquery')(require("jsdom").jsdom().parentWindow);
 
+var malls = require('./mall-enum');
+
 var url = 'http://www.plazalasamericas.com/promotions-listing/';
 
 var timeBetweenRequests = 0;
@@ -30,12 +32,14 @@ function ScrapeSale (url) {
 
 			var sale = {};
 
+			sale.mallId = malls['PlazaLasAmericas'];
+
 			sale.name = saleDiv.children('.promo-title').text();
 			sale.description = saleDiv.children('p').text();
 
 			var saleDates = saleDiv.children('.promo-title + h3').text().split(' - ');
-			sale.effective_date = saleDates[0];
-			sale.expiration_date = saleDates.length === 2 ? saleDates[1] : '';
+			sale.effectiveDate = saleDates[0];
+			sale.expirationDate = saleDates.length === 2 ? saleDates[1] : '';
 
 			var imgUrl = saleDiv.children('img.attachment-full').attr('src');
 
