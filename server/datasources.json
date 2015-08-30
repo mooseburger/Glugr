@@ -4,12 +4,12 @@
     "connector": "memory"
   },
   "Glugr": {
-    "name": "Glugr",
-    "connector": "mysql",
     "host": "localhost",
     "port": 3306,
     "database": "Glugr",
     "username": "mooseburger",
-    "password": "R3nzokuken"
+    "password": "R3nzokuken",
+    "name": "Glugr",
+    "connector": "mysql"
   }
 }
