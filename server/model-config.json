@@ -32,7 +32,11 @@
     "dataSource": "db",
     "public": false
   },
-  "Sales": {
+  "Sale": {
+    "dataSource": "Glugr",
+    "public": true
+  },
+  "Mall": {
     "dataSource": "Glugr",
     "public": true
   }
