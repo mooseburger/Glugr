@@ -4,15 +4,21 @@ var $ = require('jquery')(require("jsdom").jsdom().parentWindow);
 
 var url = 'http://www.plazalasamericas.com/promotions-listing/';
 
+var timeBetweenRequests = 0;
+
 request(url, function (error, response, body) {
 	if (!error && response.statusCode === 200) {
 		$(body).find('#promotions-right').children('table').find('td:nth-child(3)').children('a').each(function () {
-			ScrapeSale($(this).attr('href'));
+			(function (url, time) {
+				setTimeout(function () {
+					ScrapeSale(url);
+				}, time);
+			})($(this).attr('href'), timeBetweenRequests += 5000);
 		});
 	}
 
 	else {
-		console.log(error);
+		LogError(error, response, body);
 	}
 });
 
@@ -38,6 +44,8 @@ function ScrapeSale (url) {
 			InsertSale(sale);
 
 			DownloadImage(imgUrl, sale.image);
+
+			console.log('Scraped ' + url);
 		}
 
 		else {
