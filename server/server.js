@@ -3,6 +3,10 @@ var boot = require('loopback-boot');
 
 var app = module.exports = loopback();
 
+app.set('view engine', 'ejs');
+
+require('node-jsx').install();
+
 app.start = function() {
   // start the web server
   return app.listen(function() {

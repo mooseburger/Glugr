@@ -1,6 +1,12 @@
+var React = require('react');
+
+var SaleSection = React.createFactory(require('../../components/SaleSection.js'));
+
 module.exports = function (app) {
-	//Install a /ping route that returns pong
-	app.get('/ping', function (req, res) {
-		res.send('pongaroo');
+
+	app.get('/', function (req, res) {
+		var reactHtml = React.renderToString(SaleSection({}));
+
+		res.render('index.ejs', {reactOutput: reactHtml});
 	});
 };
