@@ -1,8 +1,12 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
+var path = require('path');
 
 var app = module.exports = loopback();
 
+// Set view path
+app.set('views', 'views');
+// set up ejs for templating. You can use whatever
 app.set('view engine', 'ejs');
 
 require('node-jsx').install();
