@@ -69,7 +69,7 @@ function InsertSale(sale) {
 
 function DownloadImage(imgUrl, imgPath) {
 	if (imgPath) {
-		request(imgUrl, LogError).pipe(fs.createWriteStream(imgPath));
+		request(imgUrl, LogError).pipe(fs.createWriteStream('../Pictures/' + imgPath));
 	}
 }
 
@@ -82,7 +82,7 @@ function GetImagePath(pageUrl, imgUrl) {
 		var splitExt = imgUrl.split('.');
 		var imgExtension = splitExt[splitExt.length - 1];
 
-		return '../Pictures/' + imgName + '.' + imgExtension;
+		return imgName + '.' + imgExtension;
 	}
 
 	else {
@@ -96,8 +96,11 @@ function LogError (error, response, body) {
 	if (error || response.statusCode !== 200) {
 
 		error = error ? error : 'No error returned';
+		error = error + ':\n' + JSON.stringify(response) + '\n\n';
+
+		console.error(error);
 
 		var logFile = fs.createWriteStream('../debug.log', { flags : 'a' });
-		logFile.write(error + ':\n' + JSON.stringify(response) + '\n\n');
+		logFile.write(error);
 	}
 }

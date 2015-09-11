@@ -25,7 +25,7 @@ var SaleRow = React.createClass({
 	render: function () {
 		var sales = this.props.sales.map(function (sale) {
 			return (
-				<Sale name={sale.name}>
+				<Sale key={sale.id} name={sale.name}>
 					{sale.description}
 				</Sale>
 			);
@@ -47,7 +47,7 @@ var SaleSection = React.createClass({
 
 		var saleRows = slicedSales.map(function (row) {
 			return (
-				<SaleRow sales={row} />
+				<SaleRow key={row[0].id} sales={row} />
 			);
 		});
 
