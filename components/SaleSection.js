@@ -7,7 +7,7 @@ var Sale = React.createClass({
 		return (
 			<div className="4u 12u(mobile)">
 				<section className="box">
-					<a href="#" className="image featured"><img src="images/pic02.jpg" alt="" /></a>
+					<a href="#" className="image featured"><img src={'sales/' + this.props.image} alt="" /></a>
 					<header>
 						<h3>{this.props.name}</h3>
 					</header>
@@ -25,7 +25,7 @@ var SaleRow = React.createClass({
 	render: function () {
 		var sales = this.props.sales.map(function (sale) {
 			return (
-				<Sale key={sale.id} name={sale.name}>
+				<Sale key={sale.id} name={sale.name} image={sale.image}>
 					{sale.description}
 				</Sale>
 			);
