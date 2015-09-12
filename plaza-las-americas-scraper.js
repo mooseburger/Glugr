@@ -25,7 +25,12 @@ request(url, function (error, response, body) {
 });
 
 function ScrapeSale (url) {
-	request(url, function (error, response, body) {
+	request({
+		url: url,
+		headers: {
+			'User-Agent': 'Glugr Web Crawler'
+		}
+	}, function (error, response, body) {
 		if (!error && response.statusCode === 200) {
 
 			var saleDiv = $(body).find('#generic-middle');
@@ -69,7 +74,12 @@ function InsertSale(sale) {
 
 function DownloadImage(imgUrl, imgPath) {
 	if (imgPath) {
-		request(imgUrl, LogError).pipe(fs.createWriteStream('../Pictures/' + imgPath));
+		request({
+			url: imgUrl,
+			headers: {
+				'User-Agent': 'Glugr Web Crawler'
+			}
+		}, LogError).pipe(fs.createWriteStream('./client/sales/' + imgPath));
 	}
 }
 
