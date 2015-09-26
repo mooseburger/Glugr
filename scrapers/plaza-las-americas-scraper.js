@@ -20,7 +20,7 @@ request(url, function (error, response, body) {
 	}
 
 	else {
-		utils.LogError(error, response, body);
+		utils.log(error, response, body);
 	}
 });
 
@@ -48,17 +48,21 @@ function ScrapeSale (url) {
 
 			var imgUrl = saleDiv.children('img.attachment-full').attr('src');
 
-			sale.image = utils.GetImagePath(url, imgUrl);
+			if (url[url.length - 1] === '/') {
+				url = url.substring(0, url.length - 1);
+			}
 
-			utils.InsertSale(sale);
+			sale.image = utils.getImagePath(url, imgUrl);
 
-			utils.DownloadImage(imgUrl, sale.image);
+			utils.insertSale(sale);
+
+			utils.downloadImage(imgUrl, sale.image);
 
 			console.log('Scraped ' + url);
 		}
 
 		else {
-			utils.LogError(error, response, body);
+			utils.log(error, response, body);
 		}
 	});
 }
