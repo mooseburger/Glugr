@@ -1,10 +1,10 @@
-var fs = require('fs');
 var request = require('request');
 var $ = require('jquery')(require("jsdom").jsdom().parentWindow);
 
 var malls = require('./mall-enum');
+var utils = require('./utilities');
 
-var url = 'http://www.plazalasamericas.com/promotions-listing/';
+var url = 'http://www.plazalasamericas.com/promotions-listing';
 
 var timeBetweenRequests = 0;
 
@@ -20,7 +20,7 @@ request(url, function (error, response, body) {
 	}
 
 	else {
-		LogError(error, response, body);
+		utils.LogError(error, response, body);
 	}
 });
 
@@ -48,69 +48,17 @@ function ScrapeSale (url) {
 
 			var imgUrl = saleDiv.children('img.attachment-full').attr('src');
 
-			sale.image = GetImagePath(url, imgUrl);
+			sale.image = utils.GetImagePath(url, imgUrl);
 
-			InsertSale(sale);
+			utils.InsertSale(sale);
 
-			DownloadImage(imgUrl, sale.image);
+			utils.DownloadImage(imgUrl, sale.image);
 
 			console.log('Scraped ' + url);
 		}
 
 		else {
-			LogError(error, response, body);
+			utils.LogError(error, response, body);
 		}
 	});
-}
-
-function InsertSale(sale) {
-	request.post(
-		{
-			url: 'http://localhost:3000/api/Sales',
-			body: sale,
-			json: true
-		}, LogError);
-}
-
-function DownloadImage(imgUrl, imgPath) {
-	if (imgPath) {
-		request({
-			url: imgUrl,
-			headers: {
-				'User-Agent': 'Glugr Web Crawler'
-			}
-		}, LogError).pipe(fs.createWriteStream('./client/sales/' + imgPath));
-	}
-}
-
-function GetImagePath(pageUrl, imgUrl) {
-	if (imgUrl) {
-
-		var splitUrl = pageUrl.split('/');
-		var imgName = splitUrl[splitUrl.length - 2];
-
-		var splitExt = imgUrl.split('.');
-		var imgExtension = splitExt[splitExt.length - 1];
-
-		return imgName + '.' + imgExtension;
-	}
-
-	else {
-		LogError(pageUrl, 'No image found');
-
-		return '';
-	}
-}
-
-function LogError (error, response, body) {
-	if (error || response.statusCode !== 200) {
-
-		error = error ? error : 'No error returned';
-		error = error + ':\n' + JSON.stringify(response) + '\n\n';
-
-		console.error(error);
-
-		var logFile = fs.createWriteStream('../debug.log', { flags : 'a' });
-		logFile.write(error);
-	}
 }
