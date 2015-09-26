@@ -10,26 +10,36 @@ var saleListing = domain + '/mall/plaza-carolina/deals';
 
 var timeBetweenRequests = 0;
 
-var loadedPage = utils.PoliteRequest(saleListing, timeBetweenRequests);
+var loadedPage = utils.politeRequest(saleListing, timeBetweenRequests);
 
 loadedPage.then(function (body) {
 
 	var saleRequests = [];
+	var saleUrls = [];
 
 	$(body).find('#content-stream-container').children('.CSItem').children('a:nth-child(2)').each(function () {
-		saleRequests.push(utils.PoliteRequest(domain + $(this).attr('href'), timeBetweenRequests += 500));
+
+		var url = domain + $(this).attr('href');
+		saleUrls.push(url);
+
+		saleRequests.push(utils.politeRequest(url, timeBetweenRequests += 200));
 	});
 
-	return Promise.all(saleRequests);
-}).then(function (salePages) {
-	if (salePages && salePages.length > 0) {
-		salePages.forEach(function (saleBody) {
-			ScrapeSale(saleBody);
-		});
-	}
+	return Promise.all(saleRequests).then(function (salePages) {
+		if (salePages && salePages.length > 0) {
+
+			salePages.forEach(function (saleBody, ind) {
+
+				ScrapeSale(saleUrls[ind], saleBody);
+
+			});
+
+			return 'Scrape successful!';
+		}
+	});
 }).catch(console.log.bind(console));
 
-function ScrapeSale(body) {
+function ScrapeSale(url, body) {
 	var saleSec = $(body).children('section.view-item-details > div.container');
 
 	var sale = {};
@@ -44,6 +54,16 @@ function ScrapeSale(body) {
 
 	sale.effectiveDate = validFrom[0];
 	sale.expirationDate = validFrom[1];
+
+	sale.description = '';
+
+	saleSec.find('.dealOverride').children('p').each(function () {
+		sale.description += $(this).text() + '\n';
+	});
+
+	var imgUrl = saleSec.find('img').first().attr('src');
+	sale.image = utils.getImagePath(url, imgUrl);
+	utils.trimSale(sale);
 
 	console.log(JSON.stringify(sale));
 }
