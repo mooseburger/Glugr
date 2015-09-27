@@ -1917,21 +1917,21 @@
 
 		/* Nav */
 
-			#nav > ul {
+			.nav > ul {
 				margin: 0;
 			}
 
-				#nav > ul > li {
+				.nav > ul > li {
 					display: inline-block;
 					font-style: italic;
 					margin: 0 0.35em 0 0.35em;
 				}
 
-					#nav > ul > li > ul {
+					.nav > ul > li > ul {
 						display: none;
 					}
 
-					#nav > ul > li > a {
+					.nav > ul > li > a {
 						border-radius: 5px;
 						color: #5d5d5d;
 						text-decoration: none;
@@ -1943,11 +1943,11 @@
 						outline: 0;
 					}
 
-					#nav > ul > li:hover > a, #nav > ul > li.active > a {
+					.nav > ul > li:hover > a, .nav > ul > li.active > a {
 						background: #f3f3f3;
 					}
 
-					#nav > ul > li.current > a {
+					.nav > ul > li.current > a {
 						background: #d52349;
 						color: #fff !important;
 						font-weight: 700;
