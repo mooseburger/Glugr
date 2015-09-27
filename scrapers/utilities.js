@@ -69,7 +69,7 @@ module.exports = {
 		}
 
 		else {
-			console.log(JSON.stringify(response.headers));
+			console.log(JSON.stringify(response.headers.request.uri));
 		}
 	},
 

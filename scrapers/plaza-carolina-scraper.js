@@ -65,5 +65,6 @@ function ScrapeSale(url, body) {
 	sale.image = utils.getImagePath(url, imgUrl);
 	utils.trimSale(sale);
 
-	console.log(JSON.stringify(sale));
+	utils.insertSale(sale);
+	utils.downloadImage(imgUrl, sale.image);
 }
