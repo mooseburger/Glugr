@@ -15,7 +15,6 @@ var MallFilterButton = React.createClass({
 
 var MallFilter = React.createClass({
 	render: function () {
-
 		var filterButtons = this.props.malls.map(function (mall) {
 			return (
 				<MallFilterButton key={mall.id} mallId={mall.id} name={mall.name} />
