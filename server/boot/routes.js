@@ -1,7 +1,8 @@
 var React = require('react');
 
-var MallFilter = React.createFactory(require('../../components/MallFilter'));
-var SaleSection = React.createFactory(require('../../components/SaleSection'));
+var componentsDir = '../../client/assets/js/components/';
+
+var GlugrApp = React.createFactory(require(componentsDir + 'GlugrApp'));
 
 module.exports = function (app) {
 
@@ -9,13 +10,13 @@ module.exports = function (app) {
 
 		var mallPromise = app.models.Mall.promisoryFind({});
 
-		var salePromise = app.models.Sale.promisoryFind({ where: { mallId: 1}});
+		var salePromise = app.models.Sale.promisoryFind({});
 
 		Promise.all([mallPromise, salePromise]).then(function (data) {
-			var mallFilter = React.renderToString(MallFilter({ malls: data[0] }));
-			var saleListing = React.renderToString(SaleSection({ sales: data[1] }));
 
-			res.render('index.ejs', { mallFilter: mallFilter, saleListing: saleListing });
+			var glugrApp = React.renderToString(GlugrApp({ malls: data[0], sales: data[1] }));
+
+			res.render('index.ejs', { glugrApp: glugrApp });
 		}).catch(console.log.bind(console));
 	});
 };
