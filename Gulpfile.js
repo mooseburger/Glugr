@@ -18,7 +18,14 @@ gulp.task('scripts', function () {
 		transform: ['reactify']
 	});
 
-	return b.bundle()
+	var bundle = b.bundle();
+
+	//Store the unminified bundle for debugging
+	bundle
+		.pipe(source('glugr.js'))
+		.pipe(gulp.dest('./client/assets/js/bundles/'));
+
+	return bundle
 		.pipe(source('glugr.min.js'))
 		.pipe(buffer())
 		.pipe(sourcemaps.init({loadMaps: true}))
