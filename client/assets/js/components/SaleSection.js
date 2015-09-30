@@ -8,7 +8,13 @@ var SaleSection = React.createClass({
 	render: function () {
 		var slicedSales = [];
 
-		RecursiveSlicer(this.props.sales, slicedSales, 3);
+		var selectedMall = this.props.mallId;
+
+		var filteredSales = this.props.sales.filter(function (sale) {
+			return sale.mallId === selectedMall;
+		});
+
+		RecursiveSlicer(filteredSales, slicedSales, 3);
 
 		var saleRows = slicedSales.map(function (row) {
 			return (

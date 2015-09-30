@@ -9,17 +9,30 @@ var GlugrApp = React.createClass({
 	getInitialState: function () {
 		return { mallId: 1 };
 	},
+	filterSales: function (mallId) {
+		this.setState({
+			mallId: mallId
+		});
+	},
 	render: function () {
+
 		return (
 			<div className="container">
 				<div className="row">
 					<div className="12u">
-						<MallFilter malls={this.props.malls}/>
+						<MallFilter
+							mallId={this.state.mallId}
+							malls={this.props.malls}
+							onTabChange={this.filterSales}
+						/>
 					</div>
 				</div>
 				<div className="row">
 					<div className="12u">
-						<SaleSection sales={this.props.sales}/>
+						<SaleSection
+							mallId={this.state.mallId}
+							sales={this.props.sales}
+						/>
 					</div>
 				</div>
 				<div className="row">

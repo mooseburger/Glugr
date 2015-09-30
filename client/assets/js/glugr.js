@@ -2,8 +2,8 @@
 
 var React = require('react');
 
-var GlugrApp = require('./components/GlugrApp');
+var GlugrApp = React.createFactory(require('./components/GlugrApp'));
 
 var mountNode = document.getElementById('main-wrapper');
 
-React.render(new GlugrApp({}), mountNode);
+React.render(GlugrApp({ malls: [], sales: [] }), mountNode);
