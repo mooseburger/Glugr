@@ -18,3 +18,4 @@ coverage
 node_modules
 npm-debug.log
 client/sales/*
+client/assets/js/bundles/glugr.js
