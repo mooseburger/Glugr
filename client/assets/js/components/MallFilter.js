@@ -12,7 +12,7 @@ var MallFilterButton = React.createClass({
 
 		return (
 			<li className={selectedButton}>
-				<a href="#" data-id={this.props.mall.id}>
+				<a data-id={this.props.mall.id}>
 					{this.props.mall.name}
 				</a>
 			</li>
@@ -23,9 +23,8 @@ var MallFilterButton = React.createClass({
 var MallFilter = React.createClass({
 	handleFilter: function (e) {
 		var clickedEl = e.target;
-		console.log('event fired!');
-		if (clickedEl.tagName === 'a') {
-			console.log(clickedEl.dataset.id);
+
+		if (clickedEl.tagName === 'A') {
 			e.preventDefault();
 
 			var mallId = parseInt(clickedEl.dataset.id);
@@ -51,7 +50,7 @@ var MallFilter = React.createClass({
 
 		return (
 			<nav className="nav">
-				<ul onClick={this.handleFilter}>
+				<ul onClickCapture={this.handleFilter}>
 					{filterButtons}
 				</ul>
 			</nav>
