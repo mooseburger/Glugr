@@ -31,7 +31,7 @@ var MallFilter = React.createClass({
 			var mallId = parseInt(clickedEl.dataset.id);
 
 			if (mallId !== this.props.mallId) {
-				this.props.filterSales(mallId);
+				this.props.onTabChange(mallId);
 			}
 		}
 	},
