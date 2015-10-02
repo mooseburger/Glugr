@@ -1,0 +1,15 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "Glugr": {
+    "host": "localhost",
+    "port": 3306,
+    "database": "Glugr",
+    "username": "YOUR_USERNAME",
+    "password": "YOUR_PASSWORD",
+    "name": "Glugr",
+    "connector": "mysql"
+  }
+}
