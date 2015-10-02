@@ -2,6 +2,9 @@
   "name": "Glugr",
   "version": "1.0.0",
   "main": "server/server.js",
+  "engines": {
+    "node": "0.12.x"
+  },
   "scripts": {
     "pretest": "jshint ."
   },
