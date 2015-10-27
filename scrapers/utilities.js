@@ -31,7 +31,7 @@ module.exports = {
 				}
 			}).on('error', function (err) {
 				this.log(err);
-			}).pipe(fs.createWriteStream('./client/sales/' + imgPath));
+			}).pipe(fs.createWriteStream('../client/sales/' + imgPath));
 		}
 	},
 

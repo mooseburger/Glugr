@@ -1,0 +1,13 @@
+{
+  "ids": {
+    "Sale": 1,
+    "Mall": 3
+  },
+  "models": {
+    "Sale": {},
+    "Mall": {
+      "1": "{\"id\":1,\"name\":\"Plaza Las Américas\",\"description\":\"El centro de todo\"}",
+      "2": "{\"id\":2,\"name\":\"Plaza Carolina\",\"description\":\"El segundo centro comercial más grande de Puerto Rico\"}"
+    }
+  }
+}
